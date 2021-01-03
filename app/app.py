@@ -1,5 +1,7 @@
-from app import app
+from flask import Flask
 from flask import render_template, request
+app=Flask(__name__)
+
 from werkzeug.utils import secure_filename
 
 import os
@@ -22,16 +24,14 @@ import librosa
 import numpy as np
 from scipy.stats import norm
 import pickle
-import seaborn as sns
 import matplotlib.pyplot as plt
 # Import the libraries
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn import svm
 from keras.preprocessing.image import img_to_array
 from keras.applications.vgg19 import preprocess_input
 
-UPLOAD_FOLDER = 'C:/Users/Nada Mekki/Desktop/uploads'
+UPLOAD_FOLDER = '/app/uploads'
 ALLOWED_EXTENSIONS = {'wav', 'png', 'jpg', 'jpeg'}
 #pp = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -109,6 +109,6 @@ def classify_vgg():
                
       
 		
-#if __name__ == '__main__':
-   #app.run(debug = True)   
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)  
    
