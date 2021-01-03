@@ -70,7 +70,7 @@ def upload_file():
           S = librosa.feature.melspectrogram(signal, sr=rate, n_fft=2048,    hop_length=512, n_mels=128)
           S_DB = librosa.power_to_db(S, ref=np.max)
           S_DB = S_DB.flatten()[:1200]
-          clf = pickle.load(open('../SVM.pkl' , 'rb'))
+          clf = pickle.load(open('SVM.pkl' , 'rb'))
           ans = clf.predict([S_DB])[0]
           music_class = str(ans)
           print(music_class)
@@ -90,7 +90,7 @@ def classify_vgg():
                    
           base_model = VGG19(weights='imagenet')
           model = Model(inputs=base_model.input, outputs=base_model.get_layer('flatten').output)
-          image = load_img(UPLOAD_FOLDER+'/'+filename, target_size=(64, 64, 3))
+          image = load_img(UPLOAD_FOLDER+'/'+filename, target_size=(224, 224, 3))
           np.expand_dims(image, axis=0)
           image = img_to_array(image)
           image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
