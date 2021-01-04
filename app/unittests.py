@@ -1,7 +1,4 @@
-from copy import deepcopy
 import unittest
-import json
-
 import app
 
 BASE_URL = 'http://127.0.0.1:5000/'
@@ -25,4 +22,6 @@ class TestFlaskApi(unittest.TestCase):
         
 
 if __name__ == '__main__':
-    unittest.main()
+    import xmlrunner
+    runner = xmlrunner.XMLTestRunner(output='test-reports')
+    unittest.main(testRunner=runner)
