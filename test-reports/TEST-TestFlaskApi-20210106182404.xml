@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<testsuite name="TestFlaskApi-20210106182404" tests="2" time="0.001" failures="0" errors="2">
+	<testcase classname="TestFlaskApi" name="test_svm" time="0.000">
+		<error type="AttributeError" message="module 'app' has no attribute 'app'"><![CDATA[Traceback (most recent call last):
+  File "unittests.py", line 11, in setUp
+    self.app = app.app.test_client()
+AttributeError: module 'app' has no attribute 'app'
+]]></error>
+	</testcase>
+	<testcase classname="TestFlaskApi" name="test_vgg" time="0.001">
+		<error type="AttributeError" message="module 'app' has no attribute 'app'"><![CDATA[Traceback (most recent call last):
+  File "unittests.py", line 11, in setUp
+    self.app = app.app.test_client()
+AttributeError: module 'app' has no attribute 'app'
+]]></error>
+	</testcase>
+	<system-out><![CDATA[]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>
