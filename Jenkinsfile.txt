@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('prepare') {
+        stage('scm') {
              steps {
                 git credentialsId: 'git-cred', url: 'https://github.com/nada809/DockerProject.git'
                 stash name:'scm', includes:'*'

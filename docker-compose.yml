@@ -2,7 +2,7 @@ version: '3'
 services:
   backend:
     build:
-      context: ./app
+      context: ./services-flask
       dockerfile: ./Dockerfile
     restart: always
     ports:
@@ -10,7 +10,7 @@ services:
     
   frontend:
     build:
-      context: ./frontapp
+      context: ./frontend
       dockerfile: ./Dockerfile
     ports:
-      - "8080:8080"
+      - "8080:5000"
