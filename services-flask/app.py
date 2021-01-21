@@ -1,9 +1,7 @@
 from flask import Flask
 from flask import render_template, request
 app=Flask(__name__)
-
 from werkzeug.utils import secure_filename
-
 import os
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 from PIL import Image
@@ -33,7 +31,6 @@ from keras.applications.vgg19 import preprocess_input
 
 UPLOAD_FOLDER = '/app/uploads'
 ALLOWED_EXTENSIONS = {'wav', 'png', 'jpg', 'jpeg'}
-#pp = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
@@ -41,9 +38,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def home():
     return "Hello, Flask!"
     
-@app.route('/upload')
-def upload():
-   return render_template("form.html")
 
 
 
@@ -53,10 +47,9 @@ def allowed_file(filename):
            
 
 	
-@app.route('/uploader', methods = ['GET','POST'])
+@app.route('/uploadersvm', methods = ['POST'])
 def upload_file():
-   if request.method == 'GET':
-       return "hello"
+   
    if request.method == 'POST':
          file = request.files['file']
          if file.filename == '':
@@ -70,16 +63,15 @@ def upload_file():
           S = librosa.feature.melspectrogram(signal, sr=rate, n_fft=2048,    hop_length=512, n_mels=128)
           S_DB = librosa.power_to_db(S, ref=np.max)
           S_DB = S_DB.flatten()[:1200]
-          clf = pickle.load(open('SVM.pkl' , 'rb'))
+          clf = pickle.load(open('Classifier.pkl' , 'rb'))
           ans = clf.predict([S_DB])[0]
           music_class = str(ans)
           print(music_class)
-          return music_class
+          return "music genre :"+music_class
 
-@app.route('/uploadervgg', methods = ['GET','POST'])
+@app.route('/uploadervgg', methods = ['POST'])
 def classify_vgg():
-    if request.method == 'GET':
-           return "hello"
+    
     if request.method == 'POST':
          file = request.files['file']
          if file.filename == '':
@@ -96,13 +88,10 @@ def classify_vgg():
           image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
 
           image = preprocess_input(image)
-          yhat = model.predict(image)
-    # create a list containing the class labels
+          res = model.predict(image)
           class_labels = ["blues", "classical", "country", "disco", "hiphop", "metal", "pop", "reggae", "rock"]
-    # find the index of the class with maximum score
           pred = np.argmax(class_labels, axis=-1)
-    # print the label of the class with maximum score
-          return class_labels[pred]
+          return "music genre :"+class_labels[pred]
           
           
     

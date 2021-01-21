@@ -12,7 +12,7 @@ class TestFlaskApi(unittest.TestCase):
         self.app.testing = True
 
     def test_svm(self):
-        rv = self.app.get(BASE_URL+'uploader')
+        rv = self.app.get(BASE_URL+'uploadersvm')
         self.assertEqual(rv.status, '200 OK')
 
     def test_vgg(self):
@@ -22,6 +22,4 @@ class TestFlaskApi(unittest.TestCase):
         
 
 if __name__ == '__main__':
-    #import xmlrunner
-    #runner = xmlrunner.XMLTestRunner(output='test-reports')
     unittest.main()
